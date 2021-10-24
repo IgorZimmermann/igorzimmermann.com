@@ -16,6 +16,7 @@ export const LanguagePicker: React.FC<any> = ({ ...props }) => {
 		<Flex p="5px" backgroundColor={config.colors.grey} {...props}>
 			{Object.keys(config.flags).map((x) => (
 				<Box
+					key={x}
 					backgroundImage={(config.flags as any)[x]}
 					backgroundPosition="center"
 					backgroundSize="cover"

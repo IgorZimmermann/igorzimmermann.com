@@ -27,8 +27,8 @@ export const config = {
 		},
 	],
 	flags: {
-		hu: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Flag_of_Hungary.svg/510px-Flag_of_Hungary.svg.png',
-		en: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/510px-Flag_of_the_United_Kingdom.svg.png',
-		it: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/510px-Flag_of_Italy.svg.png',
+		hu: 'https://flagcdn.com/w320/hu.jpg',
+		en: 'https://flagcdn.com/w320/gb.jpg',
+		it: 'https://flagcdn.com/w320/it.jpg',
 	},
 }
