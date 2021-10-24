@@ -1,4 +1,5 @@
 import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react'
+import '../i18n/config'
 import theme from '../theme'
 
 function MyApp({ Component, pageProps }) {
