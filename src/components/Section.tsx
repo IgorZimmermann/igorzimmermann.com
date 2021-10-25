@@ -1,6 +1,7 @@
-import { Box, Text } from '@chakra-ui/layout'
+import { Box } from '@chakra-ui/layout'
 import React from 'react'
 import { config } from '../config'
+import { SectionLabel } from './SectionLabel'
 
 interface SectionProps {
 	title: string
@@ -31,18 +32,7 @@ export const Section: React.FC<SectionProps> = ({
 			backgroundPosition="center"
 			backgroundSize="cover"
 		>
-			<Text
-				zIndex={3}
-				pos={'absolute'}
-				left="3px"
-				top="3px"
-				fontFamily={'mono'}
-				fontSize="10px"
-				fontWeight={700}
-				color={config.colors.lgrey}
-			>
-				{title.toUpperCase()}
-			</Text>
+			<SectionLabel text={title} />
 			{children}
 		</Box>
 	)

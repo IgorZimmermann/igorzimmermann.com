@@ -2,9 +2,10 @@ import { Box, Flex } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { config } from '../config'
+import { SectionLabel } from './SectionLabel'
 
 export const LanguagePicker: React.FC<any> = ({ ...props }) => {
-	const { i18n } = useTranslation()
+	const { i18n, t } = useTranslation()
 
 	function changeLanguage(lan: string) {
 		if (i18n.language !== lan) {
@@ -13,7 +14,14 @@ export const LanguagePicker: React.FC<any> = ({ ...props }) => {
 	}
 
 	return (
-		<Flex p="5px" backgroundColor={config.colors.grey} {...props}>
+		<Flex
+			p="5px"
+			pt="20px"
+			backgroundColor={config.colors.grey}
+			pos="relative"
+			{...props}
+		>
+			<SectionLabel text={t('language')} />
 			{Object.keys(config.flags).map((x) => (
 				<Box
 					key={x}
