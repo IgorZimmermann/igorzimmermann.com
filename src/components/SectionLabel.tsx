@@ -4,9 +4,13 @@ import { config } from '../config'
 
 interface SectionLabelProps {
 	text: string
+	onClick?: React.MouseEventHandler<HTMLDivElement>
 }
 
-export const SectionLabel: React.FC<SectionLabelProps> = ({ text }) => {
+export const SectionLabel: React.FC<SectionLabelProps> = ({
+	text,
+	onClick,
+}) => {
 	return (
 		<Text
 			zIndex={3}
@@ -17,6 +21,10 @@ export const SectionLabel: React.FC<SectionLabelProps> = ({ text }) => {
 			fontSize="10px"
 			fontWeight={700}
 			color={config.colors.lgrey}
+			onClick={onClick || undefined}
+			_hover={{
+				cursor: onClick ? 'pointer' : 'auto',
+			}}
 		>
 			{text.toUpperCase()}
 		</Text>

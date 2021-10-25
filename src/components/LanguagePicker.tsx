@@ -15,8 +15,10 @@ export const LanguagePicker: React.FC<any> = ({ ...props }) => {
 
 	return (
 		<Flex
-			p="5px"
+			pl="5px"
+			pr="10px"
 			pt="20px"
+			pb="10px"
 			backgroundColor={config.colors.grey}
 			pos="relative"
 			{...props}
