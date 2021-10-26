@@ -1,5 +1,7 @@
 # My Personal Website
 
+![Vercel](http://therealsujitk-vercel-badge.vercel.app/?app=igorzimmermann)
+
 ## Technology used
 
 - [Next.js](https://nextjs.org)
