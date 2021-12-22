@@ -18,7 +18,7 @@ export const Modal: React.FC<ModalProps> = ({ link, setShow }) => {
 		<>
 			<Flex
 				h="100vh"
-				w="100vw"
+				w="100%"
 				pos={'fixed'}
 				top={0}
 				left={0}

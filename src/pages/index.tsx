@@ -1,4 +1,5 @@
 import { Box, Flex, Link } from '@chakra-ui/react'
+import Head from 'next/head'
 import NextLink from 'next/link'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -17,6 +18,9 @@ const Index = () => {
 
 	return (
 		<Box>
+			<Head>
+				<title>Igor Zimmermann</title>
+			</Head>
 			{modalShow ? (
 				<Modal link={modalLink} setShow={setModalShow}></Modal>
 			) : null}
