@@ -50,7 +50,7 @@ const Index = () => {
 				</Box>
 				<Button
 					onClick={() => {
-						setModalLink('https://trailers.apple.com/movies/sony/thesocialnetwork/thesocialnetwork-tlr1_h1080p.mov')
+						setModalLink('https://trailers.apple.com/movies/sony/thesocialnetwork/thesocialnetwork-tlr1b_h1080p.mov')
 						setModalShow(true)
 					}}
 				>
