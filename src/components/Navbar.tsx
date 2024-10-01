@@ -47,7 +47,7 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
 
 	return (
 		<nav className="fixed top-0 left-0 w-full h-[10dvh] bg-black text-white">
-			<div className="max-w-[1200px] mx-auto h-full w-full flex flex-row justify-between items-center">
+			<div className="mx-auto h-full w-[calc(100%_-_2em)] flex flex-row justify-between items-center">
 				<h3 className="uppercase text-sm m-0">igor zimmermann</h3>
 				<div>
 					{urls.map(
@@ -56,7 +56,7 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
 								<Link
 									href={url}
 									key={label}
-									className="text-inherit no-underline mr-2 last:mr-0 text-sm hover:opacity-90"
+									className="text-inherit no-underline mr-2 last:mr-0 text-sm hover:opacity-85"
 								>
 									{label}
 								</Link>
