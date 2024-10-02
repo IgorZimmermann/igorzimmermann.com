@@ -6,32 +6,34 @@ interface NavbarProps {}
 
 export const Navbar: React.FC<NavbarProps> = ({}) => {
 	const [showAdvanced, setShowAdvanced] = useState<boolean>(false)
-	const altKeyDown = useCallback((ev: KeyboardEvent) => {
-		if (ev.key === 'Alt') {
-			setShowAdvanced(true)
-		}
-	}, [])
-	const altKeyUp = useCallback((ev: KeyboardEvent) => {
-		if (ev.key === 'Alt') {
-			setShowAdvanced(false)
-		}
-	}, [])
+	const altKeyPress = useCallback(
+		(ev: KeyboardEvent) => {
+			if (ev.key === 'Alt') {
+				setShowAdvanced(!showAdvanced)
+			}
+		},
+		[showAdvanced]
+	)
 
 	useEffect(() => {
-		document.addEventListener('keydown', altKeyDown, false)
-		document.addEventListener('keyup', altKeyUp, false)
+		document.addEventListener('keydown', altKeyPress, false)
 
 		return () => {
-			document.removeEventListener('keydown', altKeyDown, false)
-			document.removeEventListener('keyup', altKeyUp, false)
+			document.removeEventListener('keydown', altKeyPress, false)
 		}
-	}, [altKeyDown, altKeyUp])
+	}, [altKeyPress])
 
-	const urls: { url: string; label: string; advanced: boolean }[] = [
+	const urls: {
+		url: string
+		label: string
+		advanced: boolean
+		target?: React.HTMLAttributeAnchorTarget
+	}[] = [
 		{
 			url: '/admin',
 			label: 'admin',
 			advanced: true,
+			target: '_blank',
 		},
 		{
 			url: '/projects',
@@ -51,10 +53,11 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
 				<h3 className="uppercase text-sm m-0">igor zimmermann</h3>
 				<div>
 					{urls.map(
-						({ url, label, advanced }) =>
+						({ url, label, advanced, target = '_blank' }) =>
 							((showAdvanced && advanced) || advanced === false) && (
 								<Link
 									href={url}
+									target={target}
 									key={label}
 									className="text-inherit no-underline mr-2 last:mr-0 text-sm hover:opacity-85"
 								>
