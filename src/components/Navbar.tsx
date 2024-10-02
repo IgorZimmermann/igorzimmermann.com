@@ -25,7 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
 			document.removeEventListener('keydown', altKeyDown, false)
 			document.removeEventListener('keyup', altKeyUp, false)
 		}
-	})
+	}, [altKeyDown, altKeyUp])
 
 	const urls: { url: string; label: string; advanced: boolean }[] = [
 		{
