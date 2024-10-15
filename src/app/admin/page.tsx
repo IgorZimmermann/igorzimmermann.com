@@ -6,7 +6,7 @@ import { useState } from 'react'
 const AdminPage: NextPage = () => {
 	const [imageShowModal, setShowImageModal] = useState<boolean>(false)
 
-	const [container] = useState<string>(
+	const [container, setContainer] = useState<string>(
 		process.env.NEXT_PUBLIC_PB_DEFAULT_CONTAINER!
 	)
 	const [folder, setFolder] = useState<string>(
@@ -54,6 +54,9 @@ const AdminPage: NextPage = () => {
 							name="container"
 							id="container"
 							value={container}
+							onChange={(ev) => {
+								setContainer(ev.target.value)
+							}}
 							disabled
 							className="bg-white border-0 rounded-none text-base px-2 disabled:hover:cursor-not-allowed"
 						/>
@@ -92,7 +95,7 @@ const AdminPage: NextPage = () => {
 				</form>
 			</div>
 			{imageShowModal && (
-				<div className="z-10 py-10 absolute top-[50%] left-[50%] w-[30dvw] bg-black [transform:translateX(-50%)_translateY(-50%)]">
+				<div className="z-10 absolute top-0 left-0 h-[100dvh] w-full flex justify-center items-center bg-black text-white">
 					<form
 						onSubmit={async (ev) => {
 							ev.preventDefault()
@@ -105,6 +108,7 @@ const AdminPage: NextPage = () => {
 								}
 							})
 						}}
+						className="flex flex-col w-[22dvw]"
 					>
 						<h2 className="uppercase text-xl m-0">upload image</h2>
 						{file && (
