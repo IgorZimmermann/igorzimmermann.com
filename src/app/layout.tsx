@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { ApolloWrapper } from './ApolloWrapper'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -12,7 +13,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className="m-0 p-0 box-border font-sans">{children}</body>
+			<body className="m-0 p-0 box-border font-sans">
+				<ApolloWrapper>{children}</ApolloWrapper>
+			</body>
 		</html>
 	)
 }
