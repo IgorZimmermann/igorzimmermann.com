@@ -21,7 +21,17 @@ export type GetFoldersInContainerQueryVariables = Exact<{
 }>;
 
 
-export type GetFoldersInContainerQuery = { __typename?: 'Query', getFoldersInContainer: { __typename?: 'BlobUrlsResponse', status: string, message: Array<string> } };
+export type GetFoldersInContainerQuery = { __typename?: 'Query', getFoldersInContainer: { __typename?: 'BlobFoldersResponse', status: string, message?: Array<string> | null } };
+
+export type GetBlobUrlsByLabelQueryVariables = Exact<{
+  label: Scalars['String']['input'];
+  folder: Scalars['String']['input'];
+  container: Scalars['String']['input'];
+}>;
+
+
+export type GetBlobUrlsByLabelQuery = { __typename?: 'Query', getBlobUrlsByLabel: { __typename?: 'BlobUrlsResponse', status: string, message?: Array<{ __typename?: 'Blob', url: string, label: string }> | null } };
 
 
 export const GetFoldersInContainerDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetFoldersInContainer"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"container"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getFoldersInContainer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"container"},"value":{"kind":"Variable","name":{"kind":"Name","value":"container"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<GetFoldersInContainerQuery, GetFoldersInContainerQueryVariables>;
+export const GetBlobUrlsByLabelDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBlobUrlsByLabel"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"label"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"folder"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"container"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getBlobUrlsByLabel"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"label"},"value":{"kind":"Variable","name":{"kind":"Name","value":"label"}}},{"kind":"Argument","name":{"kind":"Name","value":"folder"},"value":{"kind":"Variable","name":{"kind":"Name","value":"folder"}}},{"kind":"Argument","name":{"kind":"Name","value":"container"},"value":{"kind":"Variable","name":{"kind":"Name","value":"container"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"message"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}}]}}]} as unknown as DocumentNode<GetBlobUrlsByLabelQuery, GetBlobUrlsByLabelQueryVariables>;

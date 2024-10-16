@@ -15,6 +15,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n\tquery GetFoldersInContainer($container: String!) {\n\t\tgetFoldersInContainer(container: $container) {\n\t\t\tstatus\n\t\t\tmessage\n\t\t}\n\t}\n": types.GetFoldersInContainerDocument,
+    "\n\tquery GetBlobUrlsByLabel(\n\t\t$label: String!\n\t\t$folder: String!\n\t\t$container: String!\n\t) {\n\t\tgetBlobUrlsByLabel(label: $label, folder: $folder, container: $container) {\n\t\t\tstatus\n\t\t\tmessage {\n\t\t\t\turl\n\t\t\t\tlabel\n\t\t\t}\n\t\t}\n\t}\n": types.GetBlobUrlsByLabelDocument,
 };
 
 /**
@@ -35,6 +36,10 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n\tquery GetFoldersInContainer($container: String!) {\n\t\tgetFoldersInContainer(container: $container) {\n\t\t\tstatus\n\t\t\tmessage\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery GetFoldersInContainer($container: String!) {\n\t\tgetFoldersInContainer(container: $container) {\n\t\t\tstatus\n\t\t\tmessage\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery GetBlobUrlsByLabel(\n\t\t$label: String!\n\t\t$folder: String!\n\t\t$container: String!\n\t) {\n\t\tgetBlobUrlsByLabel(label: $label, folder: $folder, container: $container) {\n\t\t\tstatus\n\t\t\tmessage {\n\t\t\t\turl\n\t\t\t\tlabel\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery GetBlobUrlsByLabel(\n\t\t$label: String!\n\t\t$folder: String!\n\t\t$container: String!\n\t) {\n\t\tgetBlobUrlsByLabel(label: $label, folder: $folder, container: $container) {\n\t\t\tstatus\n\t\t\tmessage {\n\t\t\t\turl\n\t\t\t\tlabel\n\t\t\t}\n\t\t}\n\t}\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
