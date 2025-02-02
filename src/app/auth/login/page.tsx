@@ -26,7 +26,9 @@ const meQueryDocument = graphql(`
 `)
 
 const LoginPage: NextPage = () => {
-	const { loading: loadingUser, data: dataUser } = useQuery(meQueryDocument)
+	const { loading: loadingUser, data: dataUser } = useQuery(meQueryDocument, {
+		fetchPolicy: 'network-only',
+	})
 	const [login] = useMutation(loginMutationDocument)
 
 	const [username, setUsername] = useState<string>('')
