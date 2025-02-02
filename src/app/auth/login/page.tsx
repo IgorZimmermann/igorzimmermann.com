@@ -49,7 +49,7 @@ const LoginPage: NextPage = () => {
 									variables: { username, password },
 								})
 								if (response.data?.loginUser.status === 'okay') {
-									router.push('/admin')
+									router.push('/')
 								}
 							}}
 							className="flex flex-col w-[22dvw]"

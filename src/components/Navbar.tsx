@@ -33,7 +33,6 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
 			url: '/admin',
 			label: 'admin',
 			advanced: true,
-			target: '_blank',
 		},
 		{
 			url: '/projects',
