@@ -93,7 +93,9 @@ const LoginPage: NextPage = () => {
 						</form>
 					) : (
 						<div className="flex flex-col w-[22dvw]">
-							<h2 className="uppercase text-xl m-0 mb-4">already logged in</h2>
+							<h2 className="uppercase text-xl m-0 mb-4">
+								already logged in as {dataUser?.me.user?.username}
+							</h2>
 							<a
 								href="/"
 								className="bg-white border-0 rounded-none text-xs p-2 uppercase font-bold text-center no-underline text-black text-opacity-[0.847] hover:cursor-pointer hover:opacity-85"
