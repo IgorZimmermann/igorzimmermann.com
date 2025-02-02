@@ -1,5 +1,4 @@
 import { useLazyQuery } from '@apollo/client'
-import Image from 'next/image'
 import { useState } from 'react'
 import { graphql } from '../../gql'
 
@@ -42,17 +41,27 @@ export default function useFileUpload() {
 	}
 
 	const [label, setLabel] = useState<string>('')
+
 	const [file, setFile] = useState<File>()
 
-	const uploadFile = (): Promise<string | undefined> => {
+	const uploadFile = (
+		containerInput?: string,
+		folderInput?: string,
+		labelInput?: string,
+		fileInput?: File,
+		cb?: () => void
+	): Promise<string | undefined> => {
 		return new Promise((resolve, reject) => {
 			if (!file) return reject('no file')
 			const formData = new FormData()
-			formData.append('container', container)
-			formData.append('folder', folder)
-			formData.append('label', label)
-			formData.append('extension', file.name.split('.').at(-1) || 'jpg')
-			formData.append('files', new Blob([file]))
+			formData.append('container', containerInput || container)
+			formData.append('folder', folderInput || folder)
+			formData.append('label', labelInput || label)
+			formData.append(
+				'extension',
+				(fileInput || file).name.split('.').at(-1) || 'jpg'
+			)
+			formData.append('files', new Blob([fileInput || file]))
 
 			fetch(process.env.NEXT_PUBLIC_PB_UPLOAD_URL!, {
 				method: 'post',
@@ -61,33 +70,42 @@ export default function useFileUpload() {
 				.then((resp) => resp.json())
 				.then((data) => {
 					if (data.status === 'okay') {
-						getImageUrl({ variables: { container, folder, label } }).then(
-							(resp) => {
-								if (
-									resp.data &&
-									resp.data.getBlobUrlsByLabel.status !== 'not okay' &&
-									resp.data.getBlobUrlsByLabel.message !== null &&
-									resp.data.getBlobUrlsByLabel.message
-								) {
-									setImageUrl(resp.data?.getBlobUrlsByLabel.message[0].url)
-									resolve(resp.data?.getBlobUrlsByLabel.message[0].url)
-								} else {
-									resolve(undefined)
-								}
+						getImageUrl({
+							variables: {
+								container: containerInput || container,
+								folder: folderInput || folder,
+								label: labelInput || label,
+							},
+						}).then((resp) => {
+							if (
+								resp.data &&
+								resp.data.getBlobUrlsByLabel.status !== 'not okay' &&
+								resp.data.getBlobUrlsByLabel.message !== null &&
+								resp.data.getBlobUrlsByLabel.message
+							) {
+								setImageUrl(resp.data?.getBlobUrlsByLabel.message[0].url)
+								resolve(resp.data?.getBlobUrlsByLabel.message[0].url)
+							} else {
+								resolve(undefined)
 							}
-						)
+						})
 					} else {
 						resolve(undefined)
+					}
+				})
+				.then(() => {
+					if (cb) {
+						cb()
 					}
 				})
 				.catch((e) => reject(e))
 		})
 	}
 
-	const ImageModal = () => (
+	const ImageModal = ({ cb }: { cb?: () => void }) => (
 		<>
 			{imageShowModal && resolveModal && (
-				<div className="z-10 absolute top-0 left-0 h-[100dvh] w-full flex justify-center items-center bg-black text-white">
+				<div className="z-10 fixed top-0 left-0 h-[100dvh] w-full flex justify-center items-center bg-black text-white">
 					<form
 						onSubmit={async (ev) => {
 							ev.preventDefault()
@@ -98,6 +116,9 @@ export default function useFileUpload() {
 									setLabel('')
 									setFile(undefined)
 									resolveModal(val)
+									if (cb) {
+										cb()
+									}
 								}
 							})
 						}}
@@ -105,12 +126,10 @@ export default function useFileUpload() {
 					>
 						<h2 className="uppercase text-xl m-0">upload image</h2>
 						{file && (
-							<Image
+							<img
 								src={URL.createObjectURL(file)}
 								alt="uploaded image"
-								width={1200}
-								height={1200}
-								className="h-[50dvh] w-auto w-max-[30dvw]"
+								className="h-max-[50dvh] w-auto w-max-[30dvw]"
 							/>
 						)}
 						<input
@@ -137,7 +156,7 @@ export default function useFileUpload() {
                 [&::-webkit-file-upload-button]:invisible
                 text-transparent bg-white border-0 appearance-none rounded-none p-2 relative my-5
                 [&::before]:[content:_'upload_file'] [&::before]:block [&::before]:p-2 [&::before]:bg-white [&::before]:text-black [&::before]:text-center [&::before]:absolute [&::before]:top-[50%] [&::before]:left-[50%] [&::before]:[transform:translateX(-50%)_translateY(-50%)] [&::before]:uppercase [&::before]:font-bold"
-							onChange={async (ev) => {
+							onChange={(ev) => {
 								if (ev.target.files) {
 									setFile(ev.target.files[0])
 									setLabel(ev.target.files[0].name.split('.')[0])
@@ -187,5 +206,6 @@ export default function useFileUpload() {
 		ImageModal,
 		showImageModal,
 		hideImageModal: () => setShowImageModal(false),
+		uploadFile,
 	}
 }
