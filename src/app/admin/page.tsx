@@ -358,7 +358,7 @@ const AdminPage: NextPage = () => {
 											className="bg-white border-0 appearance-none rounded-none text-base px-2"
 											value={currentFolder}
 											onChange={(ev) => {
-												if (ev.target.value === 'CURRENT FOLDER') return
+												if (ev.target.value === 'SELECT FOLDER') return
 
 												if (ev.target.value === 'new') {
 													setShowNewFolderModal(true)
