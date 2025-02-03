@@ -106,8 +106,8 @@ const AdminPage: NextPage = () => {
 	const [containersList, setContainersList] = useState<string[]>([])
 	const [currentContainer, setCurrentContainer] = useState<string>()
 
-	const [foldersList, setFoldersList] = useState<string[]>([])
-	const [currentFolder, setCurrentFolder] = useState<string>('new')
+	const [foldersList, setFoldersList] = useState<string[]>(['SELECT FOLDER'])
+	const [currentFolder, setCurrentFolder] = useState<string>('SELECT FOLDER')
 
 	const [imagesList, setImagesList] = useState<
 		{
@@ -166,53 +166,39 @@ const AdminPage: NextPage = () => {
 			},
 		})
 
-	const [
-		queryFoldersInContainer,
-		{
-			refetch: refetchQueryFoldersInContainer,
-			loading: loadingQueryFoldersInContainer,
-			called: calledQueryFoldersInContainer,
-		},
-	] = useLazyQuery(getFoldersInContainerQueryDocument, {
-		nextFetchPolicy: 'cache-and-network',
-		onCompleted: async (data) => {
-			if (
-				data.getFoldersInContainer.status !== 'not okay' &&
-				data.getFoldersInContainer.message !== undefined &&
-				data.getFoldersInContainer.message !== null
-			) {
-				if (data.getFoldersInContainer.message.length > 0) {
-					setFoldersList(data.getFoldersInContainer.message)
-					setCurrentFolder(foldersList[0])
+	const [queryFoldersInContainer, { refetch: refetchQueryFoldersInContainer }] =
+		useLazyQuery(getFoldersInContainerQueryDocument, {
+			nextFetchPolicy: 'cache-and-network',
+			onCompleted: async (data) => {
+				if (
+					data.getFoldersInContainer.status !== 'not okay' &&
+					data.getFoldersInContainer.message !== undefined &&
+					data.getFoldersInContainer.message !== null
+				) {
+					if (data.getFoldersInContainer.message.length > 0) {
+						setFoldersList(
+							['SELECT FOLDER'].concat(data.getFoldersInContainer.message)
+						)
+						setCurrentFolder(foldersList[0])
 
-					if (currentContainer && currentFolder) {
-						await queryImagesInFolder({
-							variables: {
-								container: currentContainer,
-								folder: currentFolder,
-							},
-						})
+						if (currentContainer && currentFolder) {
+							await queryImagesInFolder({
+								variables: {
+									container: currentContainer,
+									folder: currentFolder,
+								},
+							})
+						}
 					}
 				}
-			}
-		},
-	})
+			},
+		})
 
 	useEffect(() => {
-		if (
-			loadingQueryFoldersInContainer === false &&
-			calledQueryFoldersInContainer === true &&
-			currentFolder !== undefined &&
-			currentFolder === 'new'
-		) {
+		if (currentFolder === 'new') {
 			setShowNewFolderModal(true)
 		}
-	}, [
-		currentFolder,
-		setNewFolderName,
-		loadingQueryFoldersInContainer,
-		calledQueryFoldersInContainer,
-	])
+	}, [currentFolder])
 
 	useEffect(() => {
 		if (currentContainer !== undefined && currentFolder !== undefined) {
@@ -372,6 +358,8 @@ const AdminPage: NextPage = () => {
 											className="bg-white border-0 appearance-none rounded-none text-base px-2"
 											value={currentFolder}
 											onChange={(ev) => {
+												if (ev.target.value === 'CURRENT FOLDER') return
+
 												if (ev.target.value === 'new') {
 													setShowNewFolderModal(true)
 												} else {
