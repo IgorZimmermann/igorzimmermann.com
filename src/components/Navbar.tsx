@@ -52,7 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
 				<h3 className="uppercase text-sm m-0">igor zimmermann</h3>
 				<div>
 					{urls.map(
-						({ url, label, advanced, target = '_blank' }) =>
+						({ url, label, advanced, target = '_self' }) =>
 							((showAdvanced && advanced) || advanced === false) && (
 								<Link
 									href={url}
