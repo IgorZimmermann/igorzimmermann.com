@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_homepage_media",
+  "info": {
+    "displayName": "Media"
+  },
+  "options": {},
+  "attributes": {
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "music",
+        "movie",
+        "series",
+        "book"
+      ]
+    }
+  },
+  "config": {}
+}

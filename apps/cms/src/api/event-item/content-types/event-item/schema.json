@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "event_items",
+  "info": {
+    "singularName": "event-item",
+    "pluralName": "event-items",
+    "displayName": "Event"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Start": {
+      "type": "date",
+      "required": true
+    },
+    "End": {
+      "type": "date"
+    },
+    "Value": {
+      "type": "string",
+      "required": true
+    },
+    "Subvalue": {
+      "type": "string"
+    }
+  }
+}

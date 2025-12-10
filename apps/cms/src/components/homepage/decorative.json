@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_homepage_decoratives",
+  "info": {
+    "displayName": "Decorative"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "stars",
+        "magnet-lines"
+      ]
+    }
+  },
+  "config": {}
+}
