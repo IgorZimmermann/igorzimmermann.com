@@ -12,6 +12,7 @@ query Homepage {
 				}
 				... on ComponentHomepageEventList {
 					id
+					sort
 					event_items {
 						documentId
 						Value

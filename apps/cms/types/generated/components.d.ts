@@ -21,6 +21,9 @@ export interface HomepageEventList extends Struct.ComponentSchema {
       'oneToMany',
       'api::event-item.event-item'
     >;
+    sort: Schema.Attribute.Enumeration<['ascending', 'descending']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'descending'>;
   };
 }
 

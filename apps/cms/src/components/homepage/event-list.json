@@ -9,6 +9,15 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::event-item.event-item"
+    },
+    "sort": {
+      "type": "enumeration",
+      "required": true,
+      "default": "descending",
+      "enum": [
+        "ascending",
+        "descending"
+      ]
     }
   },
   "config": {}
