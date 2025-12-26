@@ -13,11 +13,13 @@
 		"@apollo/client": "^4.0.11",
 		"@apollo/client-integration-nextjs": "^0.14.3",
 		"@personal/graphql-documents": "workspace:*",
+		"clsx": "^2.1.1",
 		"dotenv": "^17.2.3",
 		"graphql": "^16.12.0",
 		"next": "16.1.1",
 		"react": "19.2.3",
 		"react-dom": "19.2.3",
+		"tailwind-merge": "^3.4.0",
 		"zod": "^4.2.1"
 	},
 	"devDependencies": {
