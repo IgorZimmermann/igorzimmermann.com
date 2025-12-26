@@ -9,6 +9,8 @@
 		"lint": "eslint --fix"
 	},
 	"dependencies": {
+		"@apollo/client": "^4.0.11",
+		"@apollo/client-integration-nextjs": "^0.14.3",
 		"@strapi/client": "^1.6.0",
 		"next": "16.1.1",
 		"react": "19.2.3",
