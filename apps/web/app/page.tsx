@@ -1,25 +1,23 @@
-import { gql } from "@apollo/client"
+import type { HomepageQuery } from "../types/generated/graphql"
 
+import { HomepageDocument } from "../types/generated/graphql"
 import { query } from "./apollo-client"
 
 export default async function Home() {
-	const content = await query({ query: gql`
-    query Homepage {
-      homepage {
-        documentId
-        homepage_grid_items {
-          documentId
-          title
-        }
-      }
-    }
-  ` })
+	const content = await query<HomepageQuery>({ query: HomepageDocument })
 
 	return (
 		<div>
-			{(content.data as { homepage: { documentId: string, homepage_grid_items: [{ title: string, documentId: string }] } }).homepage.homepage_grid_items.map(x => (
-				<p key={x.documentId}>{x.title}</p>
-			))}
+			{content.data && content.data.homepage && content.data.homepage.homepage_grid_items.map((gridItem) => {
+				if (gridItem !== null) {
+					return (
+						<p key={gridItem.documentId}>{gridItem.title}</p>
+					)
+				}
+				else {
+					return null
+				}
+			})}
 		</div>
 	)
 }

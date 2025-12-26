@@ -1,0 +1,51 @@
+query Homepage {
+	homepage {
+		documentId
+		homepage_grid_items {
+			documentId
+			title
+			width
+			content {
+				... on ComponentHomepageDecorative {
+					id
+					decorationType: type
+				}
+				... on ComponentHomepageEventList {
+					id
+					event_items {
+						documentId
+						Value
+						Subvalue
+						Start
+						End
+					}
+				}
+				... on ComponentHomepageImage {
+					id
+					source {
+						documentId
+						url
+					}
+				}
+				... on ComponentHomepageMedia {
+					id
+					title
+					mediaType: type
+					cover {
+						documentId
+						url
+					}
+				}
+				... on ComponentHomepageHeader {
+					id
+					title
+					subtitle
+				}
+				... on Error {
+					code
+					message
+				}
+			}
+		}
+	}
+}
