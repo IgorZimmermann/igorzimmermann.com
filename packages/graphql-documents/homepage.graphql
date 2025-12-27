@@ -35,7 +35,9 @@ query Homepage {
 					cover {
 						documentId
 						url
+						alternativeText
 					}
+					link
 				}
 				... on ComponentHomepageHeader {
 					id

@@ -5,6 +5,7 @@ import GridItemMagnet from "../components/grid/decorative/magnet"
 import GridItemEventList from "../components/grid/event-list"
 import GridItemHeader from "../components/grid/header"
 import GridItem from "../components/grid/item"
+import GridItemMedia from "../components/grid/media"
 import { Enum_Componenthomepagedecorative_Type, HomepageDocument } from "../types/generated/graphql"
 import { query } from "./apollo-client"
 
@@ -30,6 +31,8 @@ export default async function Home() {
 											default:
 												return null
 										}
+									case "ComponentHomepageMedia":
+										return <GridItemMedia image={gridItem.content[0].cover} type={gridItem.content[0].mediaType} title={gridItem.content[0].title} link={gridItem.content[0].link} />
 									default:
 										return null
 								}

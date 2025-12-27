@@ -4,6 +4,7 @@ import {
 	InMemoryCache,
 	registerApolloClient,
 } from "@apollo/client-integration-nextjs"
+import { join } from "node:path"
 
 import env from "../lib/env"
 
@@ -12,7 +13,7 @@ export const { getClient, query, PreloadQuery } = registerApolloClient(() => {
 		cache: new InMemoryCache(),
 		link: new HttpLink({
 			// this needs to be an absolute url, as relative urls cannot be used in SSR
-			uri: env.STRAPI_URL,
+			uri: join(env.STRAPI_URL, "/graphql"),
 			headers: {
 				Authorization: `bearer ${env.STRAPI_TOKEN}`,
 			},

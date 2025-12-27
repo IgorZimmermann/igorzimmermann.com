@@ -22,7 +22,7 @@ export default function GridItem({ label, width, children }: GridItemProps) {
 			{label
 				&& (
 					<label className={cn(
-						"uppercase font-bold absolute top-2 left-2 text-xs",
+						"uppercase font-bold absolute z-10 top-2 left-2 text-xs",
 					)}
 					>
 						{label}

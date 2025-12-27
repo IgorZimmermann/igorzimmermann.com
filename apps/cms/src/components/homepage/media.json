@@ -26,6 +26,10 @@
         "series",
         "book"
       ]
+    },
+    "link": {
+      "type": "string",
+      "required": true
     }
   },
   "config": {}
