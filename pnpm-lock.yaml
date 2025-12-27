@@ -84,6 +84,9 @@ importers:
       '@apollo/client-integration-nextjs':
         specifier: ^0.14.3
         version: 0.14.3(@apollo/client@4.0.11(graphql-ws@6.0.6(graphql@16.12.0)(ws@8.17.1))(graphql@16.12.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rxjs@7.8.2))(@types/react@19.2.7)(graphql@16.12.0)(next@16.1.1(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rxjs@7.8.2)
+      '@graphql-typed-document-node/core':
+        specifier: ^3.2.0
+        version: 3.2.0(graphql@16.12.0)
       '@personal/graphql-documents':
         specifier: workspace:*
         version: link:../../packages/graphql-documents
