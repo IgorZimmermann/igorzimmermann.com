@@ -23,7 +23,7 @@ export default function GridItemMedia({ image, title, link }: GridItemMediaProps
 					href={link}
 					target="_blank"
 					rel="noopener noreferrer"
-					className={cn("px-5 py-1 bg-white text-black")}
+					className={cn("px-5 py-1 bg-white text-black transition-colors ease-in duration-100 hover:bg-black hover:text-white")}
 				>
 					View
 				</a>
