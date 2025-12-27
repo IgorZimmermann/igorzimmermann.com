@@ -9,6 +9,8 @@ import GridItemMedia from "../components/grid/media"
 import { Enum_Componenthomepagedecorative_Type, HomepageDocument } from "../types/generated/graphql"
 import { query } from "./apollo-client"
 
+export const revalidate = 60
+
 export default async function Home() {
 	const content = await query<HomepageQuery>({ query: HomepageDocument })
 
