@@ -1,3 +1,5 @@
+import moment from "moment"
+
 import type { HomepageQuery } from "../types/generated/graphql"
 
 import GridContainer from "../components/grid/container"
@@ -34,7 +36,7 @@ export default async function Home() {
 												return null
 										}
 									case "ComponentHomepageMedia":
-										return <GridItemMedia image={gridItem.content[0].cover} type={gridItem.content[0].mediaType} title={gridItem.content[0].title} link={gridItem.content[0].link} />
+										return <GridItemMedia image={gridItem.content[0].cover} type={gridItem.content[0].mediaType} title={gridItem.content[0].title} link={gridItem.content[0].link} release={gridItem.content[0].release ? moment(gridItem.content[0].release).format("YYYY") : null} />
 									default:
 										return null
 								}

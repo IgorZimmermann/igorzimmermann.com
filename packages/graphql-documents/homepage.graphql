@@ -38,6 +38,7 @@ query Homepage {
 						alternativeText
 					}
 					link
+					release
 				}
 				... on ComponentHomepageHeader {
 					id

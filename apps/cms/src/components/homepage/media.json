@@ -30,6 +30,9 @@
     "link": {
       "type": "string",
       "required": true
+    },
+    "release": {
+      "type": "date"
     }
   },
   "config": {}

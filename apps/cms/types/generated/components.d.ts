@@ -56,6 +56,7 @@ export interface HomepageMedia extends Struct.ComponentSchema {
   attributes: {
     cover: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     link: Schema.Attribute.String & Schema.Attribute.Required;
+    release: Schema.Attribute.Date;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     type: Schema.Attribute.Enumeration<['music', 'movie', 'series', 'book']> &
       Schema.Attribute.Required;
