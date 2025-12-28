@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { cn } from "../../../lib/cn"
 
@@ -9,6 +9,9 @@ export default function GridItemMagnet() {
 	const columns = 12
 
 	const containerRef = useRef<HTMLDivElement | null>(null)
+
+	const [cursor, setCursor] = useState<{ x: number, y: number }>({ x: 0, y: 0 })
+	const [lastScroll, setLastScroll] = useState<{ x: number, y: number }>({ x: 0, y: 0 })
 
 	useEffect(() => {
 		const container = containerRef.current
@@ -34,20 +37,22 @@ export default function GridItemMagnet() {
 
 		const handlePointerMove = (e: PointerEvent) => {
 			onPointerMove({ x: e.x, y: e.y })
+			setCursor({ x: e.x, y: e.y })
+		}
+
+		const handleScroll = () => {
+			onPointerMove({ x: cursor.x + lastScroll.x - window.scrollX, y: cursor.y + lastScroll.y - window.scrollY })
+			setLastScroll({ x: window.scrollX, y: window.scrollY })
 		}
 
 		window.addEventListener("pointermove", handlePointerMove)
-
-		if (items.length) {
-			const middleIndex = Math.floor(items.length / 2)
-			const rect = items[middleIndex].getBoundingClientRect()
-			onPointerMove({ x: rect.x, y: rect.y })
-		}
+		window.addEventListener("scroll", handleScroll)
 
 		return () => {
 			window.removeEventListener("pointermove", handlePointerMove)
+			window.removeEventListener("scroll", handleScroll)
 		}
-	})
+	}, [cursor, lastScroll])
 
 	const total = rows * columns
 	const lines = Array.from({ length: total }, (_, i) => (
@@ -61,7 +66,7 @@ export default function GridItemMagnet() {
 			}
 			style={{
 				// @ts-expect-error setting css variable
-				"--rotate": "10deg",
+				"--rotate": "0deg",
 				"transform": "rotate(var(--rotate))",
 				"willChange": "transform",
 			}}
