@@ -17,7 +17,7 @@ export default function GridItemMedia({ image, title, link }: GridItemMediaProps
 	return (
 		<div className={cn("flex justify-center items-center w-full h-full")}>
 			<div className={cn("w-full px-32 flex flex-col items-center gap-10")}>
-				<Image src={join(env.STRAPI_URL, image.url)} alt={image.alternativeText || ""} width={1000} height={1000} className={cn("object-cover")} />
+				<Image src={env.NODE_ENV === "production" ? image.url : join(env.STRAPI_URL, image.url)} alt={image.alternativeText || ""} width={1000} height={1000} className={cn("object-cover")} />
 				<h3 className={cn("font-bold text-2xl")}>{title}</h3>
 				<a
 					href={link}

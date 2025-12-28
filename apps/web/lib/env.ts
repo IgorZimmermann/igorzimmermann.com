@@ -3,6 +3,8 @@ import "dotenv/config"
 
 const envSchema = z.object({
 	NODE_ENV: z.union([z.literal("development"), z.literal("production")]),
+
+	STRAPI_MEDIA: z.url(),
 	STRAPI_URL: z.url(),
 	STRAPI_TOKEN: z.string().min(1),
 })
