@@ -10,6 +10,8 @@ export default function GridItemMagnet() {
 
 	const containerRef = useRef<HTMLDivElement | null>(null)
 
+	const [isClicked, setIsClicked] = useState<boolean>(false)
+
 	const [cursor, setCursor] = useState<{ x: number, y: number }>({ x: 0, y: 0 })
 	const [lastScroll, setLastScroll] = useState<{ x: number, y: number }>({ x: 0, y: 0 })
 
@@ -45,14 +47,20 @@ export default function GridItemMagnet() {
 			setLastScroll({ x: window.scrollX, y: window.scrollY })
 		}
 
+		const handleClick = () => {
+			setIsClicked(!isClicked)
+		}
+
 		window.addEventListener("pointermove", handlePointerMove)
 		window.addEventListener("scroll", handleScroll)
+		container.addEventListener("click", handleClick)
 
 		return () => {
 			window.removeEventListener("pointermove", handlePointerMove)
 			window.removeEventListener("scroll", handleScroll)
+			container.removeEventListener("click", handleClick)
 		}
-	}, [cursor, lastScroll])
+	}, [cursor, lastScroll, isClicked])
 
 	const total = rows * columns
 	const lines = Array.from({ length: total }, (_, i) => (
@@ -60,14 +68,14 @@ export default function GridItemMagnet() {
 			key={i}
 			className={
 				cn(
-					"block origin-center bg-white",
+					"block origin-center bg-[currentColor]",
 					`w-[.5vmin] h-[6vmin]`,
 				)
 			}
 			style={{
 				// @ts-expect-error setting css variable
 				"--rotate": "0deg",
-				"transform": "rotate(var(--rotate))",
+				"transform": `rotate(calc(var(--rotate) + ${isClicked ? "90deg" : "0deg"}))`,
 				"willChange": "transform",
 			}}
 		/>
