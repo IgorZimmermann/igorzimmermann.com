@@ -14,6 +14,7 @@ export default function GridItem({ label, width, children }: GridItemProps) {
 		<div className={
 			cn(
 				"relative",
+				"[:nth-child(4n)]:bg-gray-200 [:nth-child(4n)]:text-black [:nth-child(4n-1)]:bg-gray-200 [:nth-child(4n-1)]:text-black",
 				width === Enum_Homepagegriditem_Width.Half ? "aspect-square" : "md:col-span-2",
 				width === Enum_Homepagegriditem_Width.Full && "h-dvw md:h-[50dvw]",
 			)
