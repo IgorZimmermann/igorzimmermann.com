@@ -44,6 +44,11 @@ export type BooleanFilterInput = {
   startsWith?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+export type ComponentHomepageBookClub = {
+  __typename?: 'ComponentHomepageBookClub';
+  id: Scalars['ID']['output'];
+};
+
 export type ComponentHomepageDecorative = {
   __typename?: 'ComponentHomepageDecorative';
   id: Scalars['ID']['output'];
@@ -254,7 +259,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = ComponentHomepageDecorative | ComponentHomepageEventList | ComponentHomepageHeader | ComponentHomepageImage | ComponentHomepageMedia | EventItem | Homepage | HomepageGridItem | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = ComponentHomepageBookClub | ComponentHomepageDecorative | ComponentHomepageEventList | ComponentHomepageHeader | ComponentHomepageImage | ComponentHomepageMedia | EventItem | Homepage | HomepageGridItem | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Homepage = {
   __typename?: 'Homepage';
@@ -291,7 +296,7 @@ export type HomepageGridItem = {
   width: Enum_Homepagegriditem_Width;
 };
 
-export type HomepageGridItemContentDynamicZone = ComponentHomepageDecorative | ComponentHomepageEventList | ComponentHomepageHeader | ComponentHomepageImage | ComponentHomepageMedia | Error;
+export type HomepageGridItemContentDynamicZone = ComponentHomepageBookClub | ComponentHomepageDecorative | ComponentHomepageEventList | ComponentHomepageHeader | ComponentHomepageImage | ComponentHomepageMedia | Error;
 
 export type HomepageGridItemEntityResponseCollection = {
   __typename?: 'HomepageGridItemEntityResponseCollection';
@@ -1253,6 +1258,7 @@ export type HomepageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type HomepageQuery = { __typename?: 'Query', homepage?: { __typename?: 'Homepage', documentId: string, homepage_grid_items: Array<{ __typename?: 'HomepageGridItem', documentId: string, title?: string | null, width: Enum_Homepagegriditem_Width, content: Array<
+        | { __typename?: 'ComponentHomepageBookClub' }
         | { __typename?: 'ComponentHomepageDecorative', id: string, decorationType: Enum_Componenthomepagedecorative_Type }
         | { __typename?: 'ComponentHomepageEventList', id: string, sort: Enum_Componenthomepageeventlist_Sort, event_items: Array<{ __typename?: 'EventItem', documentId: string, Value: string, Subvalue?: string | null, Start: any, End?: any | null } | null> }
         | { __typename?: 'ComponentHomepageHeader', id: string, title: string, subtitle: string }
