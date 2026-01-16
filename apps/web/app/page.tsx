@@ -2,6 +2,7 @@ import moment from "moment"
 
 import type { HomepageQuery } from "../types/generated/graphql"
 
+import GridItemBookClub from "../components/grid/book-club"
 import GridContainer from "../components/grid/container"
 import GridItemMagnet from "../components/grid/decorative/magnet"
 import GridItemEventList from "../components/grid/event-list"
@@ -37,6 +38,8 @@ export default async function Home() {
 										}
 									case "ComponentHomepageMedia":
 										return <GridItemMedia image={gridItem.content[0].cover} type={gridItem.content[0].mediaType} title={gridItem.content[0].title} link={gridItem.content[0].link} release={gridItem.content[0].release ? moment(gridItem.content[0].release).format("YYYY") : null} />
+									case "ComponentHomepageBookClub":
+										return <GridItemBookClub />
 									default:
 										return null
 								}
