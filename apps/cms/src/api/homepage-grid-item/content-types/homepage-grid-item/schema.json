@@ -22,7 +22,8 @@
         "homepage.event-list",
         "homepage.image",
         "homepage.media",
-        "homepage.header"
+        "homepage.header",
+        "homepage.book-club"
       ],
       "required": true
     },

@@ -1,5 +1,13 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface HomepageBookClub extends Struct.ComponentSchema {
+  collectionName: 'components_homepage_book_clubs';
+  info: {
+    displayName: 'Book Club';
+  };
+  attributes: {};
+}
+
 export interface HomepageDecorative extends Struct.ComponentSchema {
   collectionName: 'components_homepage_decoratives';
   info: {
@@ -66,6 +74,7 @@ export interface HomepageMedia extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'homepage.book-club': HomepageBookClub;
       'homepage.decorative': HomepageDecorative;
       'homepage.event-list': HomepageEventList;
       'homepage.header': HomepageHeader;
