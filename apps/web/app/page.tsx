@@ -2,6 +2,7 @@ import moment from "moment"
 
 import type { HomepageQuery } from "../types/generated/graphql"
 
+import Footer from "../components/footer"
 import GridItemBookClub from "../components/grid/book-club"
 import GridContainer from "../components/grid/container"
 import GridItemMagnet from "../components/grid/decorative/magnet"
@@ -51,6 +52,7 @@ export default async function Home() {
 					return null
 				}
 			})}
+			<Footer />
 		</GridContainer>
 	)
 }
