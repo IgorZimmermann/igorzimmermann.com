@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 
 import "./globals.css"
+import { HashScroller } from "../components/hash-scroller"
 import { cn } from "../lib/cn"
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={cn("bg-black", "text-white")}>
+				<HashScroller />
 				{children}
 			</body>
 		</html>

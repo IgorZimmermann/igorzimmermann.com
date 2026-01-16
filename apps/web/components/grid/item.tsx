@@ -1,6 +1,7 @@
 import type { ReactNode } from "react"
 
 import { cn } from "../../lib/cn"
+import { normalize } from "../../lib/normalize"
 import { Enum_Homepagegriditem_Width } from "../../types/generated/graphql"
 
 type GridItemProps = {
@@ -11,14 +12,17 @@ type GridItemProps = {
 
 export default function GridItem({ label, width, children }: GridItemProps) {
 	return (
-		<div className={
-			cn(
-				"relative",
-				"[:nth-child(4n)]:bg-gray-200 [:nth-child(4n)]:text-black [:nth-child(4n-1)]:bg-gray-200 [:nth-child(4n-1)]:text-black",
-				width === Enum_Homepagegriditem_Width.Half ? "aspect-square" : "md:col-span-2",
-				width === Enum_Homepagegriditem_Width.Full && "h-dvw md:h-[50dvw]",
-			)
-		}
+		<div
+			className={
+				cn(
+					"relative",
+					"[:nth-child(4n)]:bg-gray-200 [:nth-child(4n)]:text-black [:nth-child(4n-1)]:bg-gray-200 [:nth-child(4n-1)]:text-black",
+					"scroll-mt-[calc((100dvh-50dvw)/2)]",
+					width === Enum_Homepagegriditem_Width.Half ? "aspect-square" : "md:col-span-2",
+					width === Enum_Homepagegriditem_Width.Full && "h-dvw md:h-[50dvw]",
+				)
+			}
+			id={label ? normalize(label) : undefined}
 		>
 			{label
 				&& (
