@@ -2,6 +2,8 @@ import { load } from "cheerio"
 import Image from "next/image"
 
 import { cn } from "../../lib/cn"
+import env from "../../lib/env"
+import { loadBookClubSites } from "../../lib/load-bookclub-sites"
 
 export default async function GridItemBookClub() {
 	const resp = await fetch("https://www.goodreads.com/user/show/107252153", { next: {
@@ -13,6 +15,24 @@ export default async function GridItemBookClub() {
 	const bookUrl = `https://www.goodreads.com${$("#currentlyReadingReviews>div.Updates>div.firstcol>a[title]").attr("href")}`
 	const bookAuthor = $("#currentlyReadingReviews>div.Updates>div.secondcol a.authorName").text()
 	const bookImage = $("#currentlyReadingReviews>div.Updates>div.firstcol>a[title]>img[src]").attr("src")?.replace("._SX98_", "._SX800_")
+
+	const bookclub = await loadBookClubSites()
+	let thisIndex: number | null = null
+
+	let previousIndex: number = 0
+	let nextIndex: number = 0
+
+	if (bookclub !== null) {
+		thisIndex = bookclub.sites.findIndex(x => x.startsWith(env.DOMAIN))
+		if (thisIndex === -1) {
+			thisIndex = null
+		}
+
+		if (thisIndex !== null) {
+			previousIndex = (thisIndex - 1 < 0) ? bookclub.sites.length - 1 : thisIndex - 1
+			nextIndex = (thisIndex + 1 >= bookclub.sites.length) ? 0 : thisIndex + 1
+		}
+	}
 
 	return (
 		<div className={cn("flex justify-center items-center w-full h-full")}>
@@ -37,7 +57,35 @@ export default async function GridItemBookClub() {
 				: (
 						<span>failed loading book</span>
 					)}
-
+			{bookclub !== null && thisIndex !== null && (
+				<>
+					<a
+						href={bookclub.sites[previousIndex]}
+						target="_blank"
+						className={cn("absolute left-2 md:left-10 top-[50%] transform-[translateY(-50%)] hover:underline")}
+					>
+						← previous
+					</a>
+					<a
+						href={bookclub.sites[nextIndex]}
+						target="_blank"
+						className={cn("absolute right-2 md:right-10 top-[50%] transform-[translateY(-50%)] hover:underline")}
+					>
+						next →
+					</a>
+					<p
+						className={cn("absolute left-[50%] bottom-2 transform-[translateX(-50%)] w-full text-center")}
+					>
+						This site is part of the
+						{" "}
+						<a href={bookclub.indexPage} target="_blank" className={cn("hover:underline")}>
+							{bookclub.ringName}
+						</a>
+						{" "}
+						webring.
+					</p>
+				</>
+			)}
 		</div>
 	)
 }
