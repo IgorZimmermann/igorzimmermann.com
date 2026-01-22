@@ -7,7 +7,7 @@ import { loadBookClubSites } from "../../lib/load-bookclub-sites"
 
 export default async function GridItemBookClub() {
 	const resp = await fetch("https://www.goodreads.com/user/show/107252153", { next: {
-		revalidate: 60 * 60 * 12, // 12 hours in seconds,
+		revalidate: 60 * 60, // 1 hour in seconds,
 	} })
 	const $ = load(await resp.text())
 
@@ -55,7 +55,7 @@ export default async function GridItemBookClub() {
 						</div>
 					)
 				: (
-						<span>failed loading book</span>
+						<p className={cn("max-w-[40dvw] text-center")}>not reading anything currently</p>
 					)}
 			{bookclub !== null && thisIndex !== null && (
 				<>
