@@ -1,15 +1,17 @@
 import moment from "moment"
+import { join } from "node:path"
 
 import type { HomepageQuery } from "../types/generated/graphql"
 
 import Footer from "../components/footer"
-import GridItemBookClub from "../components/grid/book-club"
+import GridItemBookClub from "../components/grid/book-club/loader"
 import GridContainer from "../components/grid/container"
 import GridItemMagnet from "../components/grid/decorative/magnet"
 import GridItemEventList from "../components/grid/event-list"
 import GridItemHeader from "../components/grid/header"
 import GridItem from "../components/grid/item"
 import GridItemMedia from "../components/grid/media"
+import env from "../lib/env"
 import { Enum_Componenthomepagedecorative_Type, HomepageDocument } from "../types/generated/graphql"
 import { query } from "./apollo-client"
 
@@ -38,7 +40,18 @@ export default async function Home() {
 												return null
 										}
 									case "ComponentHomepageMedia":
-										return <GridItemMedia image={gridItem.content[0].cover} type={gridItem.content[0].mediaType} title={gridItem.content[0].title} link={gridItem.content[0].link} release={gridItem.content[0].release ? moment(gridItem.content[0].release).format("YYYY") : null} />
+										return (
+											<GridItemMedia
+												image={{
+													url: env.NODE_ENV === "production" ? gridItem.content[0].cover.url : join(env.STRAPI_URL, gridItem.content[0].cover.url),
+													alternativeText: gridItem.content[0].cover.alternativeText,
+												}}
+												type={gridItem.content[0].mediaType}
+												title={gridItem.content[0].title}
+												link={gridItem.content[0].link}
+												release={gridItem.content[0].release ? moment(gridItem.content[0].release).format("YYYY") : null}
+											/>
+										)
 									case "ComponentHomepageBookClub":
 										return <GridItemBookClub />
 									default:

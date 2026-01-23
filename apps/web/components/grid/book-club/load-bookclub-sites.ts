@@ -1,8 +1,8 @@
 import vm from "node:vm"
 
-import env from "./env"
+import env from "../../../lib/env"
 
-type siteVariables = {
+export type siteVariables = {
 	sites: string[]
 	ringName: string
 	ringID: string
@@ -10,7 +10,10 @@ type siteVariables = {
 }
 
 export async function loadBookClubSites(): Promise<siteVariables | null> {
-	const resp = await fetch("https://isak.me/onionring/onionring-variables.js", { cache: "no-cache" })
+	const resp = await fetch("https://isak.me/onionring/onionring-variables.js", { next: { revalidate: 60 } }).catch((err) => {
+		console.error("error", err)
+		return { ok: false, text: async () => "no" }
+	})
 
 	if (!resp.ok) {
 		return null
