@@ -1,3 +1,4 @@
+import { track } from "@vercel/analytics"
 import { load } from "cheerio"
 import Image from "next/image"
 
@@ -49,6 +50,10 @@ export default async function GridItemBookClub() {
 								target="_blank"
 								rel="noopener noreferrer"
 								className={cn("px-5 py-1 bg-white text-black transition-colors ease-in duration-100 hover:bg-black hover:text-white")}
+
+								onClick={() => {
+									track("Book View", { title: bookTitle })
+								}}
 							>
 								View
 							</a>
@@ -62,14 +67,24 @@ export default async function GridItemBookClub() {
 					<a
 						href={bookclub.sites[previousIndex]}
 						target="_blank"
+						rel="noopener"
 						className={cn("absolute left-2 md:left-10 top-[50%] transform-[translateY(-50%)] hover:underline")}
+
+						onClick={() => {
+							track("Book Club Interact", { type: "previous" })
+						}}
 					>
 						← previous
 					</a>
 					<a
 						href={bookclub.sites[nextIndex]}
 						target="_blank"
+						rel="noopener"
 						className={cn("absolute right-2 md:right-10 top-[50%] transform-[translateY(-50%)] hover:underline")}
+
+						onClick={() => {
+							track("Book Club Interact", { type: "next" })
+						}}
 					>
 						next →
 					</a>
@@ -78,7 +93,16 @@ export default async function GridItemBookClub() {
 					>
 						This site is part of the
 						{" "}
-						<a href={bookclub.indexPage} target="_blank" className={cn("hover:underline")}>
+						<a
+							href={bookclub.indexPage}
+							target="_blank"
+							rel="noopener"
+							className={cn("hover:underline")}
+
+							onClick={() => {
+								track("Book Club Interact", { type: "index" })
+							}}
+						>
 							{bookclub.ringName}
 						</a>
 						{" "}

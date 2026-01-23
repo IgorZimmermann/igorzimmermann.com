@@ -1,3 +1,4 @@
+import { track } from "@vercel/analytics"
 import Image from "next/image"
 import { join } from "node:path"
 
@@ -35,6 +36,10 @@ export default function GridItemMedia({ image, title, link, release }: GridItemM
 						target="_blank"
 						rel="noopener noreferrer"
 						className={cn("px-5 py-1 bg-white text-black transition-colors ease-in duration-100 hover:bg-black hover:text-white")}
+
+						onClick={() => {
+							track("Media View", { title })
+						}}
 					>
 						View
 					</a>

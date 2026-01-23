@@ -1,5 +1,6 @@
 "use client"
 
+import { track } from "@vercel/analytics"
 import { useEffect } from "react"
 
 export function HashScroller() {
@@ -11,9 +12,14 @@ export function HashScroller() {
 		const id = hash.replace("#", "")
 		const el = document.getElementById(id)
 
+		let success = false
+
 		if (el) {
 			el.scrollIntoView()
+			success = true
 		}
+
+		track("Hash Scroll", { target: id, success })
 	}, [])
 
 	return null
