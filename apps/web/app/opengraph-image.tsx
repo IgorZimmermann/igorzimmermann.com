@@ -21,9 +21,34 @@ export default async function Image() {
 
 	return new ImageResponse(
 		(
-			<div tw="w-full h-full flex flex-col items-center justify-center text-center bg-black text-white font-sans">
-				<h1 tw="font-bold text-4xl uppercase m-0">igor zimmermann</h1>
-				<h3 tw="m-0">bsc, software engineering @ sdu</h3>
+			<div
+				style={{
+					width: "100%",
+					height: "100%",
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+					justifyContent: "center",
+					textAlign: "center",
+					backgroundColor: "black",
+					color: "white",
+					fontFamily: "ui-sans-serif, system-ui, sans-serif",
+				}}
+			>
+				<h1 style={{
+					fontWeight: 700,
+					fontSize: "36px",
+					textTransform: "uppercase",
+					margin: 0,
+				}}
+				>
+					igor zimmermann
+				</h1>
+				<h3
+					style={{ fontWeight: 400, margin: 0 }}
+				>
+					bsc, software engineering @ sdu
+				</h3>
 			</div>
 		),
 		{
