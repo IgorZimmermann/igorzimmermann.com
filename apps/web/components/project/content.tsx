@@ -14,7 +14,7 @@ export default function ProjectContent({
 	if (!content)
 		return null
 	return (
-		<div className={cn("px-2 max-w-[75ch] mx-auto", "[&>*]:mb-5")}>
+		<div className={cn("px-2 max-w-[75ch] mx-auto", "*:mb-5")}>
 			<BlocksRenderer
 				content={content}
 				blocks={{
