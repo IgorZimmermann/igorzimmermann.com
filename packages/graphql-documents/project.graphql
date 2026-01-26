@@ -1,0 +1,9 @@
+query Projects($filters: ProjectFiltersInput) {
+	projects(filters: $filters) {
+		slug
+		title
+		description
+		date
+		content
+	}
+}

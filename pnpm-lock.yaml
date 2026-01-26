@@ -90,6 +90,9 @@ importers:
       '@personal/graphql-documents':
         specifier: workspace:*
         version: link:../../packages/graphql-documents
+      '@strapi/blocks-react-renderer':
+        specifier: ^1.0.2
+        version: 1.0.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@vercel/analytics':
         specifier: ^1.6.1
         version: 1.6.1(next@16.1.1(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
@@ -2846,6 +2849,12 @@ packages:
       react-dom: ^17.0.0 || ^18.0.0
       react-router-dom: ^6.0.0
       styled-components: ^6.0.0
+
+  '@strapi/blocks-react-renderer@1.0.2':
+    resolution: {integrity: sha512-pRV/WMreo5wyrLg7J0pw1DM9lg8U8m+QA7Bd8CPN3beUBTdDhYrFTTNZh3XveEdnURZNJu1X0aWXAg4SzVg7QA==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
 
   '@strapi/cloud-cli@5.31.3':
     resolution: {integrity: sha512-VGL/RKtD5RoyRcrgX+nkNN8SGQuD5Z4vqlaQ/3IhEuX+iTSXg2W7KOh8dkDaJQRbwTxKHX2QURyhGtL3YKe7HA==}
@@ -12499,6 +12508,11 @@ snapshots:
       - sqlite3
       - supports-color
       - tedious
+
+  '@strapi/blocks-react-renderer@1.0.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+    dependencies:
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
 
   '@strapi/cloud-cli@5.31.3':
     dependencies:
