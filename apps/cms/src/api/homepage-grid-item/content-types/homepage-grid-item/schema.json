@@ -23,7 +23,8 @@
         "homepage.image",
         "homepage.media",
         "homepage.header",
-        "homepage.book-club"
+        "homepage.book-club",
+        "homepage.project"
       ],
       "required": true
     },

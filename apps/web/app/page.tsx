@@ -1,5 +1,4 @@
 import moment from "moment"
-import { join } from "node:path"
 
 import type { HomepageQuery } from "../types/generated/graphql"
 
@@ -11,7 +10,7 @@ import GridItemEventList from "../components/grid/event-list"
 import GridItemHeader from "../components/grid/header"
 import GridItem from "../components/grid/item"
 import GridItemMedia from "../components/grid/media"
-import env from "../lib/env"
+import GridItemProject from "../components/grid/project"
 import { Enum_Componenthomepagedecorative_Type, HomepageDocument } from "../types/generated/graphql"
 import { query } from "./apollo-client"
 
@@ -51,6 +50,19 @@ export default async function Home() {
 										)
 									case "ComponentHomepageBookClub":
 										return <GridItemBookClub />
+									case "ComponentHomepageProject":
+										if (gridItem.content[0].project && gridItem.content[0].project !== null) {
+											return (
+												<GridItemProject
+													title={gridItem.content[0].project.title}
+													slug={gridItem.content[0].project.slug}
+													cover={gridItem.content[0].cover}
+												/>
+											)
+										}
+										else {
+											return null
+										}
 									default:
 										return null
 								}

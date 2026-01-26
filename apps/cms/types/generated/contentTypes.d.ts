@@ -481,6 +481,7 @@ export interface ApiHomepageGridItemHomepageGridItem
         'homepage.media',
         'homepage.header',
         'homepage.book-club',
+        'homepage.project',
       ]
     > &
       Schema.Attribute.Required;
