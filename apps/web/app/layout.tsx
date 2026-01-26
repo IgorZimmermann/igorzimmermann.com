@@ -8,7 +8,10 @@ import { HashScroller } from "../components/hash-scroller"
 import { cn } from "../lib/cn"
 
 export const metadata: Metadata = {
-	title: "Igor Zimmermann",
+	title: {
+		template: "%s | Igor Zimmermann",
+		default: "Igor Zimmermann",
+	},
 	description: "The personal website and portfolio of Igor Zimmermann",
 }
 

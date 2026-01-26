@@ -4,6 +4,7 @@ query Projects($filters: ProjectFiltersInput) {
 		title
 		description
 		date
+		keywords
 		content
 	}
 }

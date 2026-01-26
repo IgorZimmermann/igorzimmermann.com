@@ -15,7 +15,7 @@ export default function ProjectHeader({ title, date, description }: ProjectHeade
 	return (
 		<div className={cn("relative w-full h-[30dvh] bg-white text-black")}>
 			<Link href="/" className={cn("absolute top-2 left-2 text-xs uppercase font-bold hover:underline")}>
-				← home
+				back
 			</Link>
 			<div className={cn("h-full w-[75ch] flex flex-row items-center justify-between mx-auto")}>
 				<div>
