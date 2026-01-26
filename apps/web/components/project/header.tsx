@@ -13,16 +13,16 @@ type ProjectHeaderProps = {
 
 export default function ProjectHeader({ title, date, description }: ProjectHeaderProps) {
 	return (
-		<div className={cn("relative w-full h-[30dvh] bg-white text-black")}>
+		<div className={cn("relative w-full h-[30dvh] bg-white text-black px-2")}>
 			<Link href="/" className={cn("absolute top-2 left-2 text-xs uppercase font-bold hover:underline")}>
 				back
 			</Link>
-			<div className={cn("h-full w-[75ch] flex flex-row items-center justify-between mx-auto")}>
+			<div className={cn("h-full w-[75ch] max-w-[80dvw] flex flex-row items-center justify-between mx-auto")}>
 				<div>
 					<h1 className={cn("text-4xl font-bold")}>{title}</h1>
-					<p>{description}</p>
+					<p className={cn("wrap-normal")}>{description}</p>
 				</div>
-				{date && <span className={cn("text-4xl font-bold")}>{moment(date).format("YYYY")}</span>}
+				{date && <span className={cn("text-4xl font-bold hidden md:block")}>{moment(date).format("YYYY")}</span>}
 			</div>
 		</div>
 	)

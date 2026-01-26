@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 
 import moment from "moment"
 import { redirect } from "next/navigation"
-import { cache } from "react"
 
 import type { Project, ProjectsQuery } from "../../../types/generated/graphql"
 
@@ -14,7 +13,13 @@ import { query } from "../../apollo-client"
 
 export const revalidate = 60
 
-const getProject = cache(async (slug: string) => {
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+	const { slug } = await params
+
 	const content = await query<ProjectsQuery>({ query: ProjectsDocument, variables: {
 		filters: {
 			slug: {
@@ -22,17 +27,6 @@ const getProject = cache(async (slug: string) => {
 			},
 		},
 	} })
-	return content
-})
-
-export async function generateMetadata({
-	params,
-}: {
-	params: { slug: string }
-}): Promise<Metadata> {
-	const { slug } = await params
-
-	const content = await getProject(slug)
 
 	let data: Omit<Project, "documentId"> | null = null
 
@@ -63,7 +57,13 @@ export default async function ProjectPage({
 }) {
 	const { slug } = await params
 
-	const content = await getProject(slug)
+	const content = await query<ProjectsQuery>({ query: ProjectsDocument, variables: {
+		filters: {
+			slug: {
+				eq: slug,
+			},
+		},
+	} })
 
 	let data: Omit<Project, "documentId"> | null = null
 
