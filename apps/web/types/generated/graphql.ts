@@ -259,7 +259,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = ComponentHomepageBookClub | ComponentHomepageDecorative | ComponentHomepageEventList | ComponentHomepageHeader | ComponentHomepageImage | ComponentHomepageMedia | EventItem | Homepage | HomepageGridItem | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = ComponentHomepageBookClub | ComponentHomepageDecorative | ComponentHomepageEventList | ComponentHomepageHeader | ComponentHomepageImage | ComponentHomepageMedia | EventItem | Homepage | HomepageGridItem | I18NLocale | Project | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Homepage = {
   __typename?: 'Homepage';
@@ -442,6 +442,7 @@ export type Mutation = {
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
   createEventItem?: Maybe<EventItem>;
   createHomepageGridItem?: Maybe<HomepageGridItem>;
+  createProject?: Maybe<Project>;
   createReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   createReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   /** Create a new role */
@@ -451,6 +452,7 @@ export type Mutation = {
   deleteEventItem?: Maybe<DeleteMutationResponse>;
   deleteHomepage?: Maybe<DeleteMutationResponse>;
   deleteHomepageGridItem?: Maybe<DeleteMutationResponse>;
+  deleteProject?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
   deleteUploadFile?: Maybe<UploadFile>;
@@ -470,6 +472,7 @@ export type Mutation = {
   updateEventItem?: Maybe<EventItem>;
   updateHomepage?: Maybe<Homepage>;
   updateHomepageGridItem?: Maybe<HomepageGridItem>;
+  updateProject?: Maybe<Project>;
   updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   updateUploadFile: UploadFile;
@@ -495,6 +498,12 @@ export type MutationCreateEventItemArgs = {
 
 export type MutationCreateHomepageGridItemArgs = {
   data: HomepageGridItemInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationCreateProjectArgs = {
+  data: ProjectInput;
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -527,6 +536,11 @@ export type MutationDeleteEventItemArgs = {
 
 
 export type MutationDeleteHomepageGridItemArgs = {
+  documentId: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteProjectArgs = {
   documentId: Scalars['ID']['input'];
 };
 
@@ -603,6 +617,13 @@ export type MutationUpdateHomepageGridItemArgs = {
 };
 
 
+export type MutationUpdateProjectArgs = {
+  data: ProjectInput;
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
 export type MutationUpdateReviewWorkflowsWorkflowArgs = {
   data: ReviewWorkflowsWorkflowInput;
   documentId: Scalars['ID']['input'];
@@ -649,6 +670,49 @@ export type PaginationArg = {
   start?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type Project = {
+  __typename?: 'Project';
+  content: Scalars['JSON']['output'];
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  date?: Maybe<Scalars['Date']['output']>;
+  description: Scalars['String']['output'];
+  documentId: Scalars['ID']['output'];
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  slug: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ProjectEntityResponseCollection = {
+  __typename?: 'ProjectEntityResponseCollection';
+  nodes: Array<Project>;
+  pageInfo: Pagination;
+};
+
+export type ProjectFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ProjectFiltersInput>>>;
+  content?: InputMaybe<JsonFilterInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  date?: InputMaybe<DateFilterInput>;
+  description?: InputMaybe<StringFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<ProjectFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ProjectFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ProjectInput = {
+  content?: InputMaybe<Scalars['JSON']['input']>;
+  date?: InputMaybe<Scalars['Date']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
 export enum PublicationStatus {
   Draft = 'DRAFT',
   Published = 'PUBLISHED'
@@ -667,6 +731,9 @@ export type Query = {
   i18NLocales: Array<Maybe<I18NLocale>>;
   i18NLocales_connection?: Maybe<I18NLocaleEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
+  project?: Maybe<Project>;
+  projects: Array<Maybe<Project>>;
+  projects_connection?: Maybe<ProjectEntityResponseCollection>;
   reviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   reviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   reviewWorkflowsWorkflowStages: Array<Maybe<ReviewWorkflowsWorkflowStage>>;
@@ -750,6 +817,28 @@ export type QueryI18NLocalesArgs = {
 
 export type QueryI18NLocales_ConnectionArgs = {
   filters?: InputMaybe<I18NLocaleFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryProjectArgs = {
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryProjectsArgs = {
+  filters?: InputMaybe<ProjectFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryProjects_ConnectionArgs = {
+  filters?: InputMaybe<ProjectFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   status?: InputMaybe<PublicationStatus>;
