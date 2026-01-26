@@ -7,7 +7,7 @@ export default function Footer() {
 		<div
 			className={cn(
 				"md:col-span-2 h-[calc((100dvh-50dvw)/2)]",
-				"[:nth-child(4n)]:bg-gray-200 [:nth-child(4n)]:text-black [:nth-child(4n-1)]:bg-gray-200 [:nth-child(4n-1)]:text-black",
+				"[:nth-child(4n)]:bg-black [:nth-child(4n)]:text-white [:nth-child(4n-1)]:bg-black [:nth-child(4n-1)]:text-white",
 			)}
 			id="footer"
 		>

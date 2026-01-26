@@ -100,6 +100,13 @@ export type ComponentHomepageMedia = {
   type: Enum_Componenthomepagemedia_Type;
 };
 
+export type ComponentHomepageProject = {
+  __typename?: 'ComponentHomepageProject';
+  cover: UploadFile;
+  id: Scalars['ID']['output'];
+  project?: Maybe<Project>;
+};
+
 export type DateFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
@@ -259,7 +266,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = ComponentHomepageBookClub | ComponentHomepageDecorative | ComponentHomepageEventList | ComponentHomepageHeader | ComponentHomepageImage | ComponentHomepageMedia | EventItem | Homepage | HomepageGridItem | I18NLocale | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = ComponentHomepageBookClub | ComponentHomepageDecorative | ComponentHomepageEventList | ComponentHomepageHeader | ComponentHomepageImage | ComponentHomepageMedia | ComponentHomepageProject | EventItem | Homepage | HomepageGridItem | I18NLocale | Project | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Homepage = {
   __typename?: 'Homepage';
@@ -296,7 +303,7 @@ export type HomepageGridItem = {
   width: Enum_Homepagegriditem_Width;
 };
 
-export type HomepageGridItemContentDynamicZone = ComponentHomepageBookClub | ComponentHomepageDecorative | ComponentHomepageEventList | ComponentHomepageHeader | ComponentHomepageImage | ComponentHomepageMedia | Error;
+export type HomepageGridItemContentDynamicZone = ComponentHomepageBookClub | ComponentHomepageDecorative | ComponentHomepageEventList | ComponentHomepageHeader | ComponentHomepageImage | ComponentHomepageMedia | ComponentHomepageProject | Error;
 
 export type HomepageGridItemEntityResponseCollection = {
   __typename?: 'HomepageGridItemEntityResponseCollection';
@@ -442,6 +449,7 @@ export type Mutation = {
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
   createEventItem?: Maybe<EventItem>;
   createHomepageGridItem?: Maybe<HomepageGridItem>;
+  createProject?: Maybe<Project>;
   createReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   createReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   /** Create a new role */
@@ -451,6 +459,7 @@ export type Mutation = {
   deleteEventItem?: Maybe<DeleteMutationResponse>;
   deleteHomepage?: Maybe<DeleteMutationResponse>;
   deleteHomepageGridItem?: Maybe<DeleteMutationResponse>;
+  deleteProject?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
   deleteUploadFile?: Maybe<UploadFile>;
@@ -470,6 +479,7 @@ export type Mutation = {
   updateEventItem?: Maybe<EventItem>;
   updateHomepage?: Maybe<Homepage>;
   updateHomepageGridItem?: Maybe<HomepageGridItem>;
+  updateProject?: Maybe<Project>;
   updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   updateUploadFile: UploadFile;
@@ -495,6 +505,12 @@ export type MutationCreateEventItemArgs = {
 
 export type MutationCreateHomepageGridItemArgs = {
   data: HomepageGridItemInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationCreateProjectArgs = {
+  data: ProjectInput;
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -527,6 +543,11 @@ export type MutationDeleteEventItemArgs = {
 
 
 export type MutationDeleteHomepageGridItemArgs = {
+  documentId: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteProjectArgs = {
   documentId: Scalars['ID']['input'];
 };
 
@@ -603,6 +624,13 @@ export type MutationUpdateHomepageGridItemArgs = {
 };
 
 
+export type MutationUpdateProjectArgs = {
+  data: ProjectInput;
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
 export type MutationUpdateReviewWorkflowsWorkflowArgs = {
   data: ReviewWorkflowsWorkflowInput;
   documentId: Scalars['ID']['input'];
@@ -649,6 +677,52 @@ export type PaginationArg = {
   start?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type Project = {
+  __typename?: 'Project';
+  content: Scalars['JSON']['output'];
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  date?: Maybe<Scalars['Date']['output']>;
+  description: Scalars['String']['output'];
+  documentId: Scalars['ID']['output'];
+  keywords: Scalars['String']['output'];
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  slug: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ProjectEntityResponseCollection = {
+  __typename?: 'ProjectEntityResponseCollection';
+  nodes: Array<Project>;
+  pageInfo: Pagination;
+};
+
+export type ProjectFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ProjectFiltersInput>>>;
+  content?: InputMaybe<JsonFilterInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  date?: InputMaybe<DateFilterInput>;
+  description?: InputMaybe<StringFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  keywords?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ProjectFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ProjectFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ProjectInput = {
+  content?: InputMaybe<Scalars['JSON']['input']>;
+  date?: InputMaybe<Scalars['Date']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  keywords?: InputMaybe<Scalars['String']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
 export enum PublicationStatus {
   Draft = 'DRAFT',
   Published = 'PUBLISHED'
@@ -667,6 +741,9 @@ export type Query = {
   i18NLocales: Array<Maybe<I18NLocale>>;
   i18NLocales_connection?: Maybe<I18NLocaleEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
+  project?: Maybe<Project>;
+  projects: Array<Maybe<Project>>;
+  projects_connection?: Maybe<ProjectEntityResponseCollection>;
   reviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   reviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   reviewWorkflowsWorkflowStages: Array<Maybe<ReviewWorkflowsWorkflowStage>>;
@@ -750,6 +827,28 @@ export type QueryI18NLocalesArgs = {
 
 export type QueryI18NLocales_ConnectionArgs = {
   filters?: InputMaybe<I18NLocaleFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryProjectArgs = {
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryProjectsArgs = {
+  filters?: InputMaybe<ProjectFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryProjects_ConnectionArgs = {
+  filters?: InputMaybe<ProjectFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   status?: InputMaybe<PublicationStatus>;
@@ -1264,8 +1363,17 @@ export type HomepageQuery = { __typename?: 'Query', homepage?: { __typename?: 'H
         | { __typename?: 'ComponentHomepageHeader', id: string, title: string, subtitle: string }
         | { __typename?: 'ComponentHomepageImage', id: string, source: { __typename?: 'UploadFile', documentId: string, url: string } }
         | { __typename?: 'ComponentHomepageMedia', id: string, title: string, link: string, release?: any | null, mediaType: Enum_Componenthomepagemedia_Type, cover: { __typename?: 'UploadFile', documentId: string, url: string, alternativeText?: string | null } }
+        | { __typename?: 'ComponentHomepageProject', id: string, project?: { __typename?: 'Project', title: string, slug: string } | null, cover: { __typename?: 'UploadFile', documentId: string, url: string, alternativeText?: string | null } }
         | { __typename?: 'Error', code: string, message?: string | null }
        | null> } | null> } | null };
 
+export type ProjectsQueryVariables = Exact<{
+  filters?: InputMaybe<ProjectFiltersInput>;
+}>;
 
-export const HomepageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Homepage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"homepage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"homepage_grid_items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentHomepageDecorative"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","alias":{"kind":"Name","value":"decorationType"},"name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentHomepageEventList"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"sort"}},{"kind":"Field","name":{"kind":"Name","value":"event_items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"Value"}},{"kind":"Field","name":{"kind":"Name","value":"Subvalue"}},{"kind":"Field","name":{"kind":"Name","value":"Start"}},{"kind":"Field","name":{"kind":"Name","value":"End"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentHomepageImage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"source"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentHomepageMedia"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","alias":{"kind":"Name","value":"mediaType"},"name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"release"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentHomepageHeader"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Error"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<HomepageQuery, HomepageQueryVariables>;
+
+export type ProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', slug: string, title: string, description: string, date?: any | null, keywords: string, content: any } | null> };
+
+
+export const HomepageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Homepage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"homepage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"homepage_grid_items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentHomepageDecorative"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","alias":{"kind":"Name","value":"decorationType"},"name":{"kind":"Name","value":"type"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentHomepageEventList"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"sort"}},{"kind":"Field","name":{"kind":"Name","value":"event_items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"Value"}},{"kind":"Field","name":{"kind":"Name","value":"Subvalue"}},{"kind":"Field","name":{"kind":"Name","value":"Start"}},{"kind":"Field","name":{"kind":"Name","value":"End"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentHomepageImage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"source"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentHomepageMedia"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","alias":{"kind":"Name","value":"mediaType"},"name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"release"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentHomepageHeader"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentHomepageProject"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"project"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"documentId"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Error"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<HomepageQuery, HomepageQueryVariables>;
+export const ProjectsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Projects"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filters"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ProjectFiltersInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"projects"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filters"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"content"}}]}}]}}]} as unknown as DocumentNode<ProjectsQuery, ProjectsQueryVariables>;

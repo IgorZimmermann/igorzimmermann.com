@@ -45,6 +45,18 @@ query Homepage {
 					title
 					subtitle
 				}
+				... on ComponentHomepageProject {
+					id
+					project {
+						title
+						slug
+					}
+					cover {
+						documentId
+						url
+						alternativeText
+					}
+				}
 				... on Error {
 					code
 					message
