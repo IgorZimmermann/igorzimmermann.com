@@ -34,7 +34,7 @@ export default function GridItemBookClubClient({ bookTitle, bookUrl, bookAuthor,
 								href={bookUrl}
 								target="_blank"
 								rel="noopener noreferrer"
-								className={cn("px-5 py-1 bg-white text-black transition-colors ease-in duration-100 hover:bg-black hover:text-white")}
+								className={cn("px-5 py-1 bg-(--button-bg) text-(--button-c) transition-colors ease-in duration-100 hover:bg-(--button-c) hover:text-(--button-bg)")}
 
 								onClick={() => {
 									track("Book View", { title: bookTitle })
