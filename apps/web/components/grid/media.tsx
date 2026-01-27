@@ -2,6 +2,7 @@
 
 import { track } from "@vercel/analytics"
 import Image from "next/image"
+import Link from "next/link"
 
 import type { Enum_Componenthomepagemedia_Type, UploadFile } from "../../types/generated/graphql"
 
@@ -31,7 +32,7 @@ export default function GridItemMedia({ image, title, link, release }: GridItemM
 							</span>
 						)}
 					</div>
-					<a
+					<Link
 						href={link}
 						target="_blank"
 						rel="noopener noreferrer"
@@ -42,7 +43,7 @@ export default function GridItemMedia({ image, title, link, release }: GridItemM
 						}}
 					>
 						View
-					</a>
+					</Link>
 				</div>
 			</div>
 		</div>

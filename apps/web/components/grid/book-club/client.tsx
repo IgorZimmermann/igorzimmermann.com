@@ -2,6 +2,7 @@
 
 import { track } from "@vercel/analytics"
 import Image from "next/image"
+import Link from "next/link"
 
 import type { siteVariables } from "./load-bookclub-sites"
 
@@ -30,7 +31,7 @@ export default function GridItemBookClubClient({ bookTitle, bookUrl, bookAuthor,
 								<h3 className={cn("font-bold text-2xl mt-5")}>{bookTitle}</h3>
 								<span>{bookAuthor}</span>
 							</div>
-							<a
+							<Link
 								href={bookUrl}
 								target="_blank"
 								rel="noopener noreferrer"
@@ -41,7 +42,7 @@ export default function GridItemBookClubClient({ bookTitle, bookUrl, bookAuthor,
 								}}
 							>
 								View
-							</a>
+							</Link>
 						</div>
 					)
 				: (
@@ -49,7 +50,7 @@ export default function GridItemBookClubClient({ bookTitle, bookUrl, bookAuthor,
 					)}
 			{bookclub !== null && thisIndex !== null && (
 				<>
-					<a
+					<Link
 						href={bookclub.sites[previousIndex]}
 						target="_blank"
 						rel="noopener"
@@ -60,8 +61,8 @@ export default function GridItemBookClubClient({ bookTitle, bookUrl, bookAuthor,
 						}}
 					>
 						← previous
-					</a>
-					<a
+					</Link>
+					<Link
 						href={bookclub.sites[nextIndex]}
 						target="_blank"
 						rel="noopener"
@@ -72,13 +73,13 @@ export default function GridItemBookClubClient({ bookTitle, bookUrl, bookAuthor,
 						}}
 					>
 						next →
-					</a>
+					</Link>
 					<p
 						className={cn("absolute left-[50%] bottom-2 transform-[translateX(-50%)] w-full text-center")}
 					>
 						This site is part of the
 						{" "}
-						<a
+						<Link
 							href={bookclub.indexPage}
 							target="_blank"
 							rel="noopener"
@@ -89,7 +90,7 @@ export default function GridItemBookClubClient({ bookTitle, bookUrl, bookAuthor,
 							}}
 						>
 							{bookclub.ringName}
-						</a>
+						</Link>
 						{" "}
 						webring.
 					</p>
