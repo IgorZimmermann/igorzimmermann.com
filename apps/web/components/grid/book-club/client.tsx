@@ -52,7 +52,6 @@ export default function GridItemBookClubClient({ bookTitle, bookUrl, bookAuthor,
 				<>
 					<Link
 						href={bookclub.sites[previousIndex]}
-						target="_blank"
 						rel="noopener"
 						className={cn("absolute left-2 md:left-10 top-[50%] transform-[translateY(-50%)] hover:underline")}
 
@@ -64,7 +63,6 @@ export default function GridItemBookClubClient({ bookTitle, bookUrl, bookAuthor,
 					</Link>
 					<Link
 						href={bookclub.sites[nextIndex]}
-						target="_blank"
 						rel="noopener"
 						className={cn("absolute right-2 md:right-10 top-[50%] transform-[translateY(-50%)] hover:underline")}
 
