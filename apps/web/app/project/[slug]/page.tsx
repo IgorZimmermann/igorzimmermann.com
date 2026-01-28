@@ -9,9 +9,7 @@ import ProjectContainer from "../../../components/project/container"
 import ProjectContent from "../../../components/project/content"
 import ProjectHeader from "../../../components/project/header"
 import { ProjectsDocument } from "../../../types/generated/graphql"
-import { query } from "../../apollo-client"
-
-export const revalidate = 60
+import { cacheQuery } from "../../apollo-client"
 
 export async function generateMetadata({
 	params,
@@ -20,13 +18,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	const { slug } = await params
 
-	const content = await query<ProjectsQuery>({ query: ProjectsDocument, variables: {
+	const content = await cacheQuery<ProjectsQuery>({ query: ProjectsDocument, variables: {
 		filters: {
 			slug: {
 				eq: slug,
 			},
 		},
-	} })
+	}, key: [`project-${slug}`],	revalidate: 60 })
 
 	let data: Omit<Project, "documentId"> | null = null
 
@@ -57,13 +55,13 @@ export default async function ProjectPage({
 }) {
 	const { slug } = await params
 
-	const content = await query<ProjectsQuery>({ query: ProjectsDocument, variables: {
+	const content = await cacheQuery<ProjectsQuery>({ query: ProjectsDocument, variables: {
 		filters: {
 			slug: {
 				eq: slug,
 			},
 		},
-	} })
+	}, key: [`project-${slug}`],	revalidate: 60 })
 
 	let data: Omit<Project, "documentId"> | null = null
 
