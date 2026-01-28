@@ -13,10 +13,10 @@ export default async function GridItemBookClub() {
 	})
 	const $ = load(await resp.text())
 
-	const bookTitle = $("#currentlyReadingReviews>div.Updates>div.firstcol>a[title]").attr("title")
-	const bookUrl = `https://www.goodreads.com${$("#currentlyReadingReviews>div.Updates>div.firstcol>a[title]").attr("href")}`
-	const bookAuthor = $("#currentlyReadingReviews>div.Updates>div.secondcol a.authorName").text()
-	const bookImage = $("#currentlyReadingReviews>div.Updates>div.firstcol>a[title]>img[src]").attr("src")?.replace("._SX98_", "._SX800_")
+	const bookTitle = $("#currentlyReadingReviews>div.Updates:first-of-type>div.firstcol>a[title]").attr("title")
+	const bookUrl = `https://www.goodreads.com${$("#currentlyReadingReviews>div.Updates:first-of-type>div.firstcol>a[title]").attr("href")}`
+	const bookAuthor = $("#currentlyReadingReviews>div.Updates:first-of-type>div.secondcol a.authorName").text()
+	const bookImage = $("#currentlyReadingReviews>div.Updates:first-of-type>div.firstcol>a[title]>img[src]").attr("src")?.replace("._SX98_", "._SX800_")
 
 	const bookclub = await loadBookClubSites()
 	let thisIndex: number | null = null

@@ -28,7 +28,7 @@ export default function GridItemBookClubClient({ bookTitle, bookUrl, bookAuthor,
 						<div className={cn("flex flex-col items-center gap-5")}>
 							<Image src={bookImage} alt={bookTitle} width={1000} height={800} className={cn("h-[40dvh] max-h-[40dvw] w-auto")} />
 							<div className={cn("flex flex-col items-center")}>
-								<h3 className={cn("font-bold text-2xl mt-5")}>{bookTitle}</h3>
+								<h3 className={cn("font-bold text-2xl mt-5 text-ellipsis overflow-hidden max-w-[calc(var(--width)*0.9)] whitespace-nowrap")} title={bookTitle}>{bookTitle}</h3>
 								<span>{bookAuthor}</span>
 							</div>
 							<Link
