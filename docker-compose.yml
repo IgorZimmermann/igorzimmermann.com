@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres
+    restart: unless-stopped
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: thisispass
+      POSTGRES_USER: thisiscms
+      POSTGRES_DB: cms
+    volumes:
+      - pgdata:/var/lib/postgresql
+    ports:
+      - 5432:5432
+
+volumes:
+  pgdata:
