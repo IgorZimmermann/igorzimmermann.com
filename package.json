@@ -19,5 +19,11 @@
 		"eslint-plugin-react-refresh": "0.4.26",
 		"turbo": "^2.6.3",
 		"typescript": "5.9.2"
+	},
+	"pnpm": {
+		"overrides": {
+			"@strapi/admin": "5.31.3",
+			"@strapi/content-manager": "5.31.3"
+		}
 	}
 }
