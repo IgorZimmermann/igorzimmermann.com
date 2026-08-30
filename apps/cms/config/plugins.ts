@@ -1,8 +1,5 @@
 export default ({ env }) => ({
-	"media-prefix": {
-		enabled: true,
-	},
-	"upload": {
+	upload: {
 		config: {
 			provider: "aws-s3",
 			providerOptions: {
