@@ -15,7 +15,7 @@ export default ({ env }) => ({
 					endpoint: env("R2_ENDPOINT"),
 					region: "auto",
 					forcePathStyle: true,
-					params: { Bucket: env("R2_BUCKET") },
+					params: { Bucket: env("R2_BUCKET"), ACL: null },
 				},
 			},
 			actionOptions: { upload: {}, uploadStream: {}, delete: {} },
