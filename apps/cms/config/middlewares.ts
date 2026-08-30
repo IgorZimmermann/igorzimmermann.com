@@ -1,7 +1,17 @@
-export default [
+export default ({ env }) => [
 	"strapi::logger",
 	"strapi::errors",
-	"strapi::security",
+	{
+		name: "strapi::security",
+		config: {
+			contentSecurityPolicy: {
+				directives: {
+					"img-src": ["'self'", "data:", "blob:", env("R2_PUBLIC_HOST")],
+					"media-src": ["'self'", "data:", "blob:", env("R2_PUBLIC_HOST")],
+				},
+			},
+		},
+	},
 	"strapi::cors",
 	"strapi::poweredBy",
 	"strapi::query",
