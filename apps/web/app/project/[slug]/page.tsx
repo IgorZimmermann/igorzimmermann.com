@@ -11,6 +11,8 @@ import ProjectHeader from "../../../components/project/header"
 import { ProjectsDocument } from "../../../types/generated/graphql"
 import { cacheQuery } from "../../apollo-client"
 
+export const dynamic = "force-dynamic"
+
 export async function generateMetadata({
 	params,
 }: {

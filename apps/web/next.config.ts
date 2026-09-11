@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
 	/* config options here */
 	reactCompiler: true,
 	images: {
-		remotePatterns: [new URL(`${env.NODE_ENV === "production" ? env.STRAPI_MEDIA : env.STRAPI_URL}/**`), new URL("https://i.gr-assets.com/**")],
+		remotePatterns: [new URL(`${env.STRAPI_MEDIA.replace(/\/$/, "")}/**`), new URL("https://i.gr-assets.com/**")],
 		dangerouslyAllowLocalIP: env.NODE_ENV === "development",
 	},
 }
