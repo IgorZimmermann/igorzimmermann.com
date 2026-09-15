@@ -8,6 +8,7 @@
 		"start": "next start",
 		"lint": "eslint --fix",
 		"predev": "wait-on http://localhost:1337 && pnpm run gen",
+		"prebuild": "node scripts/wake-cms.mjs",
 		"gen": "graphql-codegen --config codegen.ts"
 	},
 	"dependencies": {
