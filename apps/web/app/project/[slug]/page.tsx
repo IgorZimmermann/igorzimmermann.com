@@ -4,18 +4,25 @@ import moment from "moment"
 import { notFound } from "next/navigation"
 import { cache } from "react"
 
-import type { ProjectsQuery } from "../../../types/generated/graphql"
+import type { ProjectSlugsQuery, ProjectsQuery } from "../../../types/generated/graphql"
 
 import ProjectContainer from "../../../components/project/container"
 import ProjectContent from "../../../components/project/content"
 import ProjectHeader from "../../../components/project/header"
-import { ProjectsDocument } from "../../../types/generated/graphql"
-import { query } from "../../apollo-client"
+import { ProjectsDocument, ProjectSlugsDocument } from "../../../types/generated/graphql"
+import { getClient, query } from "../../apollo-client"
 
 export const revalidate = 120
 
 export async function generateStaticParams() {
-	return []
+	const client = getClient()
+	const content = await client.query<ProjectSlugsQuery>({
+		query: ProjectSlugsDocument,
+	})
+
+	return content.data?.projects?.flatMap(project =>
+		project?.slug ? [{ slug: project.slug }] : [],
+	) ?? []
 }
 
 const getProject = cache(async (slug: string) => {
