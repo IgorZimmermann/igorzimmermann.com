@@ -1,17 +1,31 @@
 import type { Metadata } from "next"
 
 import moment from "moment"
-import { redirect } from "next/navigation"
+import { notFound } from "next/navigation"
+import { cache } from "react"
 
-import type { Project, ProjectsQuery } from "../../../types/generated/graphql"
+import type { ProjectsQuery } from "../../../types/generated/graphql"
 
 import ProjectContainer from "../../../components/project/container"
 import ProjectContent from "../../../components/project/content"
 import ProjectHeader from "../../../components/project/header"
 import { ProjectsDocument } from "../../../types/generated/graphql"
-import { cacheQuery } from "../../apollo-client"
+import { query } from "../../apollo-client"
 
-export const dynamic = "force-dynamic"
+export const revalidate = 120
+
+export async function generateStaticParams() {
+	return []
+}
+
+const getProject = cache(async (slug: string) => {
+	const content = await query<ProjectsQuery>({
+		query: ProjectsDocument,
+		variables: { filters: { slug: { eq: slug } } },
+	})
+
+	return content.data?.projects?.[0] ?? null
+})
 
 export async function generateMetadata({
 	params,
@@ -20,34 +34,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	const { slug } = await params
 
-	const content = await cacheQuery<ProjectsQuery>({ query: ProjectsDocument, variables: {
-		filters: {
-			slug: {
-				eq: slug,
-			},
-		},
-	}, key: [`project-${slug}`],	revalidate: 60 })
+	const data = await getProject(slug)
 
-	let data: Omit<Project, "documentId"> | null = null
+	if (!data)
+		return {}
 
-	if (content.data && content.data.projects) {
-		if (content.data.projects.length !== 0 && content.data.projects[0] !== null) {
-			data = content.data.projects[0]
-
-			return {
-				title: data.title,
-				description: data.description,
-				keywords: data.keywords.split(",").map(x => x.trim()),
-				authors: [
-					{
-						name: "Igor Zimmermann",
-					},
-				],
-			}
-		}
+	return {
+		title: data.title,
+		description: data.description,
+		keywords: data.keywords.split(",").map((key: string) => key.trim()),
+		authors: [{ name: "Igor Zimmermann" }],
 	}
-
-	return {}
 }
 
 export default async function ProjectPage({
@@ -57,24 +54,10 @@ export default async function ProjectPage({
 }) {
 	const { slug } = await params
 
-	const content = await cacheQuery<ProjectsQuery>({ query: ProjectsDocument, variables: {
-		filters: {
-			slug: {
-				eq: slug,
-			},
-		},
-	}, key: [`project-${slug}`],	revalidate: 60 })
+	const data = await getProject(slug)
 
-	let data: Omit<Project, "documentId"> | null = null
-
-	if (content.data && content.data.projects) {
-		if (content.data.projects.length === 0) {
-			return redirect("/")
-		}
-		else {
-			data = content.data.projects[0]
-		}
-	}
+	if (!data)
+		notFound()
 
 	return (
 		<ProjectContainer>
