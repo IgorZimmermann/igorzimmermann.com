@@ -1,3 +1,5 @@
+import type { Metadata } from "next"
+
 import moment from "moment"
 
 import type { HomepageQuery } from "../types/generated/graphql"
@@ -15,6 +17,13 @@ import { Enum_Componenthomepagedecorative_Type, HomepageDocument } from "../type
 import { query } from "./apollo-client"
 
 export const revalidate = 60
+
+export const metadata: Metadata = {
+	title: "Igor Zimmermann",
+	description: "Igor Zimmermann is a Software Engineering student at SDU Sønderborg, who has great passion for technology and digitalisation.",
+	keywords: ["igor", "zimmermann", "software", "engineer", "denmark", "soenderborg", "sønderborg", "digitalisation", "web", "developer"],
+	robots: "index",
+}
 
 export default async function Home() {
 	const content = await query<HomepageQuery>({ query: HomepageDocument })
