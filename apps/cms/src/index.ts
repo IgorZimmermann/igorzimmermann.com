@@ -1,20 +1,20 @@
-// import type { Core } from '@strapi/strapi';
+import { monitorEventLoopDelay } from "node:perf_hooks"
 
 export default {
-  /**
-   * An asynchronous register function that runs before
-   * your application is initialized.
-   *
-   * This gives you an opportunity to extend code.
-   */
-  register(/* { strapi }: { strapi: Core.Strapi } */) {},
-
-  /**
-   * An asynchronous bootstrap function that runs before
-   * your application gets started.
-   *
-   * This gives you an opportunity to set up your data model,
-   * run jobs, or perform some special logic.
-   */
-  bootstrap(/* { strapi }: { strapi: Core.Strapi } */) {},
-};
+	register() { },
+	bootstrap() {
+		const h = monitorEventLoopDelay({ resolution: 20 })
+		h.enable()
+		const report = (tag: string) => {
+			const m = process.memoryUsage()
+			/* eslint-disable-next-line no-console */
+			console.log(
+				`[${tag}] rss=${(m.rss / 1e6) | 0}MB heap=${(m.heapUsed / 1e6) | 0}/${(m.heapTotal / 1e6) | 0}MB `
+				+ `ext=${(m.external / 1e6) | 0}MB lagMax=${(h.max / 1e6) | 0}ms uptime=${process.uptime() | 0}s`,
+			)
+			h.reset()
+		}
+		setInterval(() => report("stats"), 15_000).unref()
+		process.on("SIGTERM", () => report("SIGTERM"))
+	},
+}

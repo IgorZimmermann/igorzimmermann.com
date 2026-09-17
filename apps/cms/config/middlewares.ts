@@ -1,4 +1,5 @@
 export default ({ env }) => [
+	"global::request-timer",
 	"strapi::logger",
 	"strapi::errors",
 	{
